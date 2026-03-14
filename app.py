@@ -115,7 +115,7 @@ if training_file is not None:
                         hist_freq.append(feats['Resonant_Freq_Idx'])
                         
                         # --- RMS Energy Chart ---
-                        fig_rms = go.Figure(go.Scatter(x=hist_x, y=hist_rms, mode='lines+markers', line=dict(color='#00f2fe', width=3), fill='tozeroy', name="RMS Energy"))
+                        fig_rms = go.Figure(go.Scatter(x=hist_x, y=hist_rms, mode='lines+markers', line=dict(color='#00f2fe', width=3), name="RMS Energy"))
                         fig_rms.update_layout(title="Energy Profile (RMS)", template="plotly_dark", height=350, margin=dict(l=10, r=10, t=40, b=10))
                         rms_placeholder.plotly_chart(fig_rms, width='stretch')
                         
