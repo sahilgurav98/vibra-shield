@@ -8,7 +8,7 @@ import plotly.graph_objs as go
 import time
 from scipy.fft import fft
 
-# --- Professional UI Styling (Industrial Blue Theme) ---
+
 st.set_page_config(page_title="VIBRA-SHIELD Analytics", layout="wide")
 st.markdown("""
     <style>
@@ -20,12 +20,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Project Header
 st.title("🛡️ VIBRA-SHIELD: Structural Health Analytics")
 st.markdown("#### *AI-Driven Early Warning System for Critical Infrastructure*")
 st.divider()
 
-# --- Feature Extraction Engine ---
+
 def extract_features(data_window):
     features = {}
     features['Mean_Accel'] = np.mean(data_window)
@@ -37,7 +36,7 @@ def extract_features(data_window):
     features['Resonant_Freq_Idx'] = np.max(np.abs(yf[1:len(yf)//2])) 
     return features
 
-# --- Sidebar Configuration ---
+
 with st.sidebar:
     st.header("Control Center")
     sim_speed = st.slider("Streaming Latency (Sec)", 0.1, 2.0, 0.5)
@@ -46,7 +45,7 @@ with st.sidebar:
     training_file = st.file_uploader("1. Historical Training Data", type=["csv"], key="train")
     live_file = st.file_uploader("2. Live Telemetry Feed", type=["csv"], key="live")
 
-# --- Phase 1: Model Training & Diagnostics ---
+
 if training_file is not None:
     df_train = pd.read_csv(training_file)
     
@@ -96,7 +95,7 @@ if training_file is not None:
                 df_live = pd.read_csv(live_file)
                 
                 if st.button("Initialize Live Stream"):
-                    # Create two side-by-side columns for the charts
+                    
                     col_rms, col_freq = st.columns(2)
                     rms_placeholder = col_rms.empty()
                     freq_placeholder = col_freq.empty()
@@ -116,7 +115,7 @@ if training_file is not None:
                         hist_freq.append(feats['Resonant_Freq_Idx'])
                         
                         # --- RMS Energy Chart ---
-                        fig_rms = go.Figure(go.Scatter(x=hist_x, y=hist_rms, mode='lines+markers', line=dict(color='#00f2fe', width=3), name="RMS Energy"))
+                        fig_rms = go.Figure(go.Scatter(x=hist_x, y=hist_rms, mode='lines+markers', line=dict(color='#00f2fe', width=3), fill='tozeroy', name="RMS Energy"))
                         fig_rms.update_layout(title="Energy Profile (RMS)", template="plotly_dark", height=350, margin=dict(l=10, r=10, t=40, b=10))
                         rms_placeholder.plotly_chart(fig_rms, width='stretch')
                         
