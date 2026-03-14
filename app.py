@@ -68,7 +68,7 @@ if training_file is not None:
             st.subheader("Feature Engineering Preview")
             display_df = X_df.copy()
             display_df['Label'] = y_array
-            # Updated width to 'stretch' for compatibility
+         
             st.dataframe(display_df.head(10), width='stretch')
             
             X_fit, X_eval, y_fit, y_eval = train_test_split(X_df, y_array, test_size=0.3, random_state=42)
